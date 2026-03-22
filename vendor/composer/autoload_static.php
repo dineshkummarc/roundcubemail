@@ -89,6 +89,10 @@ class ComposerStaticInit171a9eb958ff8b0c0ebc0817ecfe0770
         array (
             'JsonSchema\\' => 11,
         ),
+        'I' =>
+        array (
+            'IPLib\\' => 6,
+        ),
         'G' =>
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -300,6 +304,10 @@ class ComposerStaticInit171a9eb958ff8b0c0ebc0817ecfe0770
         'JsonSchema\\' =>
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
+        ),
+        'IPLib\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/mlocati/ip-lib/src',
         ),
         'GuzzleHttp\\Psr7\\' =>
         array (
@@ -2227,6 +2235,7 @@ class ComposerStaticInit171a9eb958ff8b0c0ebc0817ecfe0770
         'rcube_spellchecker_pspell' => __DIR__ . '/../..' . '/program/lib/Roundcube/spellchecker/pspell.php',
         'rcube_spoofchecker' => __DIR__ . '/../..' . '/program/lib/Roundcube/rcube_spoofchecker.php',
         'rcube_sql_password' => __DIR__ . '/../..' . '/plugins/password/drivers/sql.php',
+        'rcube_stalwart_password' => __DIR__ . '/../..' . '/plugins/password/drivers/stalwart.php',
         'rcube_storage' => __DIR__ . '/../..' . '/program/lib/Roundcube/rcube_storage.php',
         'rcube_string_replacer' => __DIR__ . '/../..' . '/program/lib/Roundcube/rcube_string_replacer.php',
         'rcube_text2html' => __DIR__ . '/../..' . '/program/lib/Roundcube/rcube_text2html.php',

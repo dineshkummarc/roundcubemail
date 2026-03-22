@@ -1816,6 +1816,7 @@ return array(
     'rcube_spellchecker_pspell' => $baseDir . '/program/lib/Roundcube/spellchecker/pspell.php',
     'rcube_spoofchecker' => $baseDir . '/program/lib/Roundcube/rcube_spoofchecker.php',
     'rcube_sql_password' => $baseDir . '/plugins/password/drivers/sql.php',
+    'rcube_stalwart_password' => $baseDir . '/plugins/password/drivers/stalwart.php',
     'rcube_storage' => $baseDir . '/program/lib/Roundcube/rcube_storage.php',
     'rcube_string_replacer' => $baseDir . '/program/lib/Roundcube/rcube_string_replacer.php',
     'rcube_text2html' => $baseDir . '/program/lib/Roundcube/rcube_text2html.php',
