@@ -24,6 +24,7 @@
 class rcube_smtp
 {
     private $conn;
+    private $host;
     private $response;
     private $error;
     private $anonymize_log = 0;
@@ -36,10 +37,10 @@ class rcube_smtp
     /**
      * SMTP Connection and authentication
      *
-     * @param string $host Server host
-     * @param string $port Server port
-     * @param string $user User name
-     * @param string $pass Password
+     * @param ?string $host Server host
+     * @param ?string $port Server port
+     * @param ?string $user User name
+     * @param ?string $pass Password
      *
      * @return bool True on success, or False on error
      */
@@ -113,12 +114,12 @@ class rcube_smtp
         $this->conn = new \Net_SMTP($smtp_host, $smtp_port, $helo_host, false, 0, $CONFIG['smtp_conn_options'],
             $CONFIG['gssapi_context'], $CONFIG['gssapi_cn']);
 
+        $this->host = ($use_tls ? 'tls://' : '') . $smtp_host . ':' . $smtp_port;
+
         if ($rcube->config->get('smtp_debug')) {
             $this->conn->setDebug(true, [$this, 'debug_handler']);
             $this->anonymize_log = 0;
-
-            $_host = ($use_tls ? 'tls://' : '') . $smtp_host . ':' . $smtp_port;
-            $this->debug_handler($this->conn, "Connecting to {$_host}...");
+            $this->debug_handler($this->conn, "Connecting to {$this->host}...");
         }
 
         // register authentication methods
@@ -403,6 +404,16 @@ class rcube_smtp
     }
 
     /**
+     * Get host specification
+     *
+     * @return ?string
+     */
+    public function get_host()
+    {
+        return $this->host;
+    }
+
+    /**
      * Get server response messages array
      */
     public function get_response()
@@ -420,10 +431,10 @@ class rcube_smtp
      *                       value (ie, 'test'). The header produced from those
      *                       values would be 'Subject: test'.
      *
-     * @return mixed returns false if it encounters a bad address,
-     *               otherwise returns an array containing two
-     *               elements: Any From: address found in the headers,
-     *               and the plain text version of the headers
+     * @return array|false Returns False if it encounters a bad address,
+     *                     otherwise an array containing two elements:
+     *                     Any From: address found in the headers,
+     *                     and the plain text version of the headers
      */
     private function _prepare_headers($headers)
     {
@@ -474,11 +485,11 @@ class rcube_smtp
      * bare addresses (forward paths) that can be passed to sendmail
      * or an smtp server with the rcpt to: command.
      *
-     * @param mixed $recipients either a comma-separated list of recipients
-     *                          (RFC822 compliant), or an array of recipients,
-     *                          each RFC822 valid
+     * @param string|array $recipients Either a comma-separated list of recipients
+     *                                 (RFC822 compliant), or an array of recipients,
+     *                                 each RFC822 valid
      *
-     * @return array an array of forward paths (bare addresses)
+     * @return array An array of forward paths (bare addresses)
      */
     private function _parse_rfc822($recipients)
     {
